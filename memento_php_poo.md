@@ -367,7 +367,40 @@ https://openclassrooms.com/courses/programmez-en-oriente-objet-en-php/l-heritage
 
 
 
+# Helpers Class
 
+Nous pouvons intégrer du PHP dans du HTML, mais cela devient vite difficile à lire avec les ouvertures et fermetures de balises html et PHP.
+
+Pour minimiser au maximum cette alternance , nous allons créer des classes PHP qui vont générer du HTML directement.
+
+## Voici une formulaire d'uen page de modification en html et PHP
+
+````php
+<form action="<?php echo $action; ?>" method="POST">
+    <input name="nom" value="<?php echo $nom ?>" >
+    <input name="prenom" value="<?php echo $prenom ?>" >
+    <input type="submit" value="Modifier" >
+</form>
+
+````
+
+Les variables $action, $nom et $prenom possèdent des valeurs directement récupérées de la base de données. L'HTML et le PHP sont mêlés.
+
+Pour minimiser cela, nous pouvons créer une classe Form qui gère la génération du formulaire. Nous obtiendrons alors une code un peu plus lisible.
+
+````php
+$form = new Form();
+
+echo $form->create($action); // créer le début du formulaire
+
+echo $form->text('nom',$nom); // créer un input de type texte avec comme valeur par défaut $nom (la première valeur est le type de l'input et la seconde valeur en paramètre est la valeur par défaut
+
+echo $form->text('prenom',$prenom); // créer un input de type texte avec comme valeur par défaut $prenom
+
+echo $form->submit('Modifier'); //Créer un bouton pour soumettre le formulaire se nommant Modifier
+
+echo $form->end(); //fermer le formulaire
+````
 
 
 
