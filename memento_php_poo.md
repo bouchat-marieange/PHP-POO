@@ -330,7 +330,7 @@ class Connexion
 {
 	public static funcion bdd()
 	{
-		//Code PDO pur se connecter
+		//Code PDO pour se connecter
 	}
 }
 
@@ -347,7 +347,7 @@ Connexion::bdd(); //Effectue une connexion à la base
 
 ## Challenge
 
-Créer une base de donnée en utilisant uen classe Connexion et uen méthode statique pour se connecter (utiliser PDO)
+Créer une base de donnée en utilisant uen classe Connexion et une méthode statique pour se connecter (utiliser PDO)
 
 Créer une classe Post avec les propriétés suivantes:
 * id_post, title_post, content_post
