@@ -21,13 +21,19 @@ class Connexion
 	// 	var_dump($req);
 	// }
 
-	function countTable() //Alternative avec une requête non préparée - code delphine
+	// function countTable() //Alternative avec une requête non préparée - code delphine
+	// {
+	// 	$reponse = $this->db->query('SELECT * FROM exo1');
+	// 	while ($test=$reponse->fetch())
+	// 	{
+	// 	echo $test['id];
+	// 	}
+	// }
+
+	function countTable()
 	{
-		$reponse = $this->db->query('SELECT * FROM exo1');
-		while ($test=$reponse->fetch())
-		{
-		echo $test['id'];
-		}
+	  $req = $this->db->query('SELECT COUNT(*) FROM exo1');// la méthode va compter les nombre d'utilisateurs dans toute la table - soit 3
+		var_dump($req);
 	}
 }
 ?>
