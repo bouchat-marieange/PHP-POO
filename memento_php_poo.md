@@ -180,3 +180,197 @@ $v = new Voiture ("Renault","6CV"); //Création d'un nouvel objet voiture
 $v->getMarque(); //retourne la marque du nouvel objet voiture
 ````
 
+# PHP - POO (Intro -2eme partie)
+
+## Qu'est-ce qu'un objet?
+
+* Les objets sont des entités réelles
+* Elles peuvent avoir des propriétés et des méthodes
+* On instancie une classe pour créer un objet
+
+## Qu'est-ce qu'un constructeur
+
+Un constructeur est uen méthode spéciale qui est appellée dès que l'instanciation (la création d'un nouvel objet). 
+
+Il y a 2 manières de définir le constructeur
+
+__construct() ou "Le nom de la class" (depuis PHP5)
+
+## Encapsulation
+
+
+![encapsulation](/home/user/Desktop/html/PHP-POO/download.png)
+
+Dans le code d'une class, on peut retrouver une ou des méthode(s) publique(s) et une ou des propriété(s) privée(s). 
+
+L'encapsulation permet:
+
+* L'utilisation de méthodes publiques de la classe pour modifier les propriétés
+* La protection des données
+* La validation des valeurs
+
+
+````php
+class MyClass
+{
+	private $myVar = 0;
+	public function affVar()
+	{
+		echo 'La valeur est: ' .++$this->myVar;
+	}
+}
+
+$myInstance = new MyClass();
+echo $myInstance->affVar(); // La valeur est: 1
+echo $myInstance->myVar; //Fatal Error
+
+````
+
+Parce que $myVar a été déclarée comme private, il est possible d'en afficher le contenu en passant par la fonction affVar, par contre cela renvoie une erreur si on tente de l'afficher directement car elle est private. On ne peut y avoir accès directement, seule les fonction de la class peuvent y avoir accès. Dans cet exemple, la méthode (function va afficher la valeur de la variable private en lui ajoutant 1 ++$this->myVar. La variable étant déterminée à 0 au départ, si on ajoute 1 à 0, la fonction affVar (méthode) va bien afficher 1. On a effectuer une opération sur la valeur attribuée initialement à la variable grâce à la méthode (function).
+
+## Encapsulation - Les accesseurs (Getter / Setter)
+
+* Méthodes spéciales pour accéder / modifier les propriétés d'une classe
+
+* Norme POO
+
+´´´´php
+class Vehicle
+{
+	private $_color, $_brand;
+
+	public function getColor() {return $this->_color; }
+	public function setColor($color)
+	{
+		$this->_color = $color;
+	}
+
+	public function getBrand() {return $this->_brand; }
+	public function setBrand($brand) 
+	{
+		$this->_brand = $brand;
+	}
+}	
+´´´´
+
+**get permet d'accéder aux propriété d'une classe**
+´´´´php
+public function getColor() {return $this->_color; }
+````
+
+**set permet de modidifier les propriétés d'une classe en leur envoyant une nouvelle valeur en paramètre**
+````php
+public function setColor($color)
+	{
+		$this->_color = $color;
+	}
+````
+
+Astuce avec Netbeans: Clicdroit - Insert code - Getter/Setter
+
+
+## Héritage
+
+* Les propriétés public et protected sont accessibles à l'intérieur des classes héritées
+
+* Evite la répétition de code
+
+* Permet de partager des méthodes et propriétés en commun, structurer de façon naturelle notre logique objet.
+
+````php
+class Electrique extends Voiture
+{
+	public $volt;
+
+	function Electrique($marque, $puissance, $volt)
+	{
+		parent::__construct ($marque, $puissance);
+		$this->volt = $volt;
+	}
+
+	function getVolt() {...}
+}
+````
+
+## Classes abstraites
+
+Les classes abstraites sont faites pour être héritées par défaut, elles ne peuvent être instanciées.
+
+Le seul moyen de se servir des méthodes de la classe est de l'héritée.
+
+´´´´php
+abstract class Vehicle {}
+´´´´
+
+## Méthode abstraites
+
+La définition de méthodes abstraites au sein d'une classe abstraite oblige toutesles classes héritées à définir cette fonction.
+
+````php
+abstract class Personnage
+{
+	// On va forcer toute classe héritée à écrire cette méthode car chaque personnage frappe différemment.
+	abstract public function frapper(Personnage $perso);
+}
+´´´´
+
+## Static
+
+Parfois, il peut être utile d'accéder à une classe sans devoir l'instancier.
+
+Utilisation du mot-clé "static" pour une méthode ou une propriété
+
+Quelques exemples concrets: 
+
+* Affichage d'une date
+* Connexion à une base de donnée
+
+````php
+class Connexion 
+{
+	public static funcion bdd()
+	{
+		//Code PDO pur se connecter
+	}
+}
+
+Connexion::bdd(); //Effectue une connexion à la base
+````
+
+## Quelques fonctions utiles
+
+
+| class_exists (string class_name     |        bool       |      Si une classe est déclarée |
+| get_class (object objetct)          |        object     |      Retourne la classe spécifiée |
+| get_declared_classes(void)          |        array      |      Retourne les classes définies |
+
+
+## Challenge
+
+Créer une base de donnée en utilisant uen classe Connexion et uen méthode statique pour se connecter (utiliser PDO)
+
+Créer une classe Post avec les propriétés suivantes:
+* id_post, title_post, content_post
+
+et les méthodes suivantes: 
+* addPost, removePost, findAllPost
+
+Créer les pages index.php qui affiche les Posts contenus dans la base de donnée, ajouter.php qui affiche un formulaire d'ajout d'un post.
+
+## Ressources
+
+http://bdelespierre.fr/article/la-poo-en-php-en-10-minutes-ou-moins
+
+http://www.lephpfacile.com/cours/
+
+https://openclassrooms.com/courses/programmez-en-oriente-objet-en-php/l-heritage-3 
+
+
+
+
+
+
+
+
+
+
